@@ -1,26 +1,10 @@
-/* Primera entrega del proyecto final */
-
-/* >>Objetivos Generales:
-Codificar la funcionalidad inicial del simulador. 
-Identificar el flujo de trabajo del script en términos de captura de entradas ingresadas por el usuario, procesamiento esencial del simulador y notificación de resultados en forma de salida.
-
-
->>Objetivos Específicos:
-Capturar entradas mediante prompt().
-Declarar variables y objetos necesarios para simular el proceso seleccionado.
-Crear funciones y/o métodos para realizar operaciones (suma, resta, concatenación, división, porcentaje, etc).
-Efectuar una salida, que es el resultado de los datos procesados, la cual puede hacerse por alert() o console.log().
- */
-
-
 class Producto {
-    constructor(id, nombre, precio, stock) {
+    constructor(id, nombre, precio) {
         this.id = id;
         this.nombre = nombre.toUpperCase();
         this.precio = parseFloat(precio);
     }
 }
-
 
 const productos = [];
 let salida = ""
@@ -40,6 +24,9 @@ console.log(productos);
 console.log("");
 
 
+
+let precioPorCantidad = 0
+
 do {
     let elementoProducto = prompt("Ingrese el nombre del producto que desea comprar?")
     elementoProducto = elementoProducto.toUpperCase()
@@ -47,20 +34,25 @@ do {
 
     let cantidadProducto = parseInt(prompt("Que cantidad quiere?"))
 
-    const precioPorCantidad = filtroProducto.map((el) => {
-        return {
-            id: el.id,
-            nombre: el.nombre,
-            precio: el.precio * cantidadProducto
-        }
-    })
-
-    console.log(precioPorCantidad);
+    precioPorCantidad +=filtroProducto[0].precio*cantidadProducto
 
     salida = prompt("Si quiere realizar otra compra presiones cualquier tecla \n Si quiere salir escriba ESC")
 
 } while (salida != "ESC")
 
-console.log("Fin de la compra");
+console.log("Precio final por la compra: $" +precioPorCantidad);
 
 
+
+for (const producto of productos) {
+    let tarjetaProductos = document.createElement("div");
+    
+    tarjetaProductos.innerHTML=  `<div class="card"  
+   
+
+    <h2> ID: ${producto.id} </h2>
+    <h3> Producto: ${producto.nombre} </h3>
+    <h3> Precio: $ ${producto.precio} </h3>
+    </div>`;
+    document.body.appendChild(tarjetaProductos);
+}
